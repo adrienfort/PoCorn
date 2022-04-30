@@ -30,3 +30,8 @@ if MODE is None:
 
 if MODE != "DEBUG" and MODE != "PRODUCTION":
     exit_error(f'Mode {MODE} is not valid')
+
+CHANNEL_ID: str = os.getenv("CHANNEL_ID")
+
+if CHANNEL_ID is None:
+    exit_error("No channel id provided")
