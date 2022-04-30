@@ -1,5 +1,5 @@
 import { Link as RouteLink } from 'react-router-dom';
-import { Button, Image, Link, Stack, useDisclosure, VStack } from '@chakra-ui/react';
+import { Button, Image, Link, Stack, Text, useDisclosure, VStack } from '@chakra-ui/react';
 
 import bot from 'assets/bot.svg';
 
@@ -46,23 +46,43 @@ const HomePage = (): JSX.Element => {
 				minH="100vh"
 				spacing={{ base: '32px', md: '48px', lg: '64px' }}
 			>
-				<VStack w={{ base: '90%', md: '496px' }}>
-					<WhiteInput placeholder="Enter your wallet address" />
-					<WhiteSelect>
-						{networks.map((element) => (
-							<option style={{ background: 'black' }} value={element}>
-								{element}
-							</option>
-						))}
-					</WhiteSelect>
-					<WhiteSelect>
-						{addresses.map((element) => (
-							<option style={{ background: 'black' }} value={element}>
-								{element}
-							</option>
-						))}
-					</WhiteSelect>
-					<WhiteNumberInput w="100%" />
+				<VStack w={{ base: '90%', md: '496px' }} spacing="16px">
+					<VStack spacing="8px" w="100%" align="left">
+						<Text color="white" fontWeight="500">
+							Your wallet address
+						</Text>
+						<WhiteInput placeholder="Enter your wallet address" />
+					</VStack>
+					<VStack spacing="8px" w="100%" align="left">
+						<Text color="white" fontWeight="500">
+							Select the blockchain
+						</Text>
+						<WhiteSelect>
+							{networks.map((element, index) => (
+								<option style={{ background: 'black' }} value={element} id={index.toString()}>
+									{element}
+								</option>
+							))}
+						</WhiteSelect>
+					</VStack>
+					<VStack spacing="8px" w="100%" align="left">
+						<Text color="white" fontWeight="500">
+							Select the activity
+						</Text>
+						<WhiteSelect>
+							{addresses.map((element, index) => (
+								<option style={{ background: 'black' }} value={element} id={index.toString()}>
+									{element}
+								</option>
+							))}
+						</WhiteSelect>
+					</VStack>
+					<VStack spacing="8px" w="100%" align="left">
+						<Text color="white" fontWeight="500">
+							Choose the number of blocks
+						</Text>
+						<WhiteNumberInput w="100%" />
+					</VStack>
 					<Link as={RouteLink} to="/dashboard" w="100%">
 						<Button variant="inline" w="100%" onClick={onOpen}>
 							Generate
