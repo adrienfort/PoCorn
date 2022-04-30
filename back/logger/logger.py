@@ -34,4 +34,4 @@ class Logger:
               f'{msg}.')
 
 
-logger = Logger("PoC Bot")
+logger = Logger("PoCorn Bot")
