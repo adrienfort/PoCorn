@@ -12,9 +12,9 @@ from botClient import bot
 from botConfig import TOKEN
 
 from commands.formatResponse import sendMessage
-from watcher import router
+from watcher import router as watcherRouter
 
-app.include_router(router)
+app.include_router(watcherRouter)
 
 @app.post("/webhook")
 async def webhooks(data: dict):
