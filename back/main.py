@@ -9,15 +9,19 @@ from fastapi import FastAPI
 app = FastAPI()
 
 from botClient import bot
-from botConfig import TOKEN, CHANNEL_ID
+from botConfig import TOKEN
 
 from commands.formatResponse import sendMessage
+from watcher import router
+
+app.include_router(router)
 
 @app.post("/webhook")
 async def webhooks(data: dict):
     logger.info(data)
     await sendMessage(data)
     return {"status": "ok"}
+
 
 @app.on_event("startup")
 async def startupDiscord():
