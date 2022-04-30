@@ -2,8 +2,8 @@
 
 ## Create an issue
 
-- If you've encountered a bug, open a [Bug Report](https://github.com/adrienfort/PoCorn/issues/new?assignees=&labels=&template=bug_report.md&title=).
-- If you want PoCorn to have a new fonctionality, open a [Feature Request](https://github.com/adrienfort/PoCorn/issues/new?assignees=&labels=&template=feature_request.md&title=).
+- If you've encountered a bug, open a [Bug Report](https://github.com/adrienfort/PoCorn/issues/new?assignees=adrienfort&labels=bug%2Ctriage&template=bug_report.yml&title=%5BBug%5D%3A+).
+- If you want PoCorn to have a new fonctionality, open a [Feature Request](https://github.com/adrienfort/PoCorn/issues/new?assignees=adrienfort&labels=feature%2Ctriage&template=feature_request.yml&title=%5BFeature%5D%3A+).
 
 ## Resolve an issue
 
