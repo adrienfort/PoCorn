@@ -25,14 +25,12 @@ const HomePage = (): JSX.Element => (
 					fontWeight="extrabold"
 					bgGradient={`linear-gradient(90deg, ${colors.blue[700]} 0%, ${colors.red[700]} 100%)`}
 					bgClip="text"
-					id="app-title"
 					textAlign="center"
 				>
 					PoCorn
 				</Text>
 				<Text
 					fontSize={{ base: '6px', '3xs': '10px', '2xs': '12px', xs: '14px', '2sm': '16px' }}
-					id="app-sub-title"
 					textAlign="center"
 					w="520px"
 					maxW="90vw"
@@ -42,11 +40,11 @@ const HomePage = (): JSX.Element => (
 			</VStack>
 			<VStack w={{ base: '90%', md: '496px' }}>
 				<Link as={RouteLink} to="/dashboard" w="100%">
-					<Button variant="inline" w="100%" id="app-homePage-dashboard-button">
+					<Button variant="inline" w="100%">
 						Start
 					</Button>
 				</Link>
-				<Link href="https://github.com/PoCInnovation" w="100%" isExternal id="app-homePage-login-button">
+				<Link href="https://github.com/PoCInnovation" w="100%" isExternal>
 					<OutlineButton w="100%" content={<Image src={poc} w="100px" />} />
 				</Link>
 			</VStack>
