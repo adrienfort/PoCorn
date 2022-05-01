@@ -28,7 +28,7 @@ After invite the bot, go to this [Website](https://cool-sherbet-c51568.netlify.a
 
 ## Our Pocorn team
 
-We learn during this hackaton
+We learn during this hackaton how to use Starton API.
 
 Developers
 | [<img src="https://github.com/Steci.png?size=85" width=85><br><sub>Léa Guillemard</sub>](https://github.com/Steci) | [<img src="https://github.com/Doozers.png?size=85" width=85><br><sub>Ismaël Fall</sub>](https://github.com/Doozers) | [<img src="https://github.com/AmozPay.png?size=85" width=85><br><sub>Amoz Pay</sub>](https://github.com/AmozPay) | [<img src="https://github.com/ThisisYoYoDev.png?size=85" width=85><br><sub>Yoël Edery</sub>](https://github.com/ThisisYoYoDev) | [<img src="https://github.com/adrienfort.png?size=85" width=85><br><sub>Adrien Fort</sub>](https://github.com/adrienfort)
