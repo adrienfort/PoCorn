@@ -29,7 +29,7 @@ Go to this [Website](https://cool-sherbet-c51568.netlify.app/) and generate the 
 
 ## Side-Quests
 
-- Aleph VM - 
+- Aleph VM -
 
 - Starton Notify - To be notify about new information in the blockchain
 
