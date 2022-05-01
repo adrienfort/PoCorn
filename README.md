@@ -9,9 +9,9 @@ Nowadays, getting feedback about a certain transaction outside your wallet appli
 [How did you solve that problem? What technologies did you use? What was the biggest technical challenge how do your solution solve it?]
 
 PoCorn offers you the possibility to notify the user by discord about an action on the blockchain.
-There is also a version for Berty, but this is still in progress.
+There is also a version for Berty, but it's still in progress.
 
-For this project, we use for the Front ReactJS using Chakra UI and for the Back a discord bot using PyBot.
+For this project, we use ReactJS for the Front using Chakra UI and for the Back a discord bot using PyBot and an API using fastAPI.
 The biggest technical challenge was to decentralized Aleph VM.
 ## Installation
 
@@ -25,15 +25,19 @@ The biggest technical challenge was to decentralized Aleph VM.
 
 [Explain how to use this project]
 
-Go to this [Website](https://cool-sherbet-c51568.netlify.app/) and generate the configuration you want your bot or application.
+You need to invite our discord bot to your server with this [link](https://discord.com/api/oauth2/authorize?client_id=969945066305122354&permissions=8&scope=bot). The configuration will be automatically done.
+
+After invite the bot, go to this [Website](https://cool-sherbet-c51568.netlify.app/) and generate the configuration you want your bot.
 
 ## Side-Quests
 
-- Aleph VM -
+- Aleph VM - We try to use it for run the application and discord bot on it but this is not working well, even Aleph Developper doesn't know why it don't work.
 
-- Starton Notify - To be notified about new information in the blockchain
+- Starton Notify - It's use to be notified the new information in the blockchain to our discord bot
 
-## Our Pocorn team :heart:
+## Our Pocorn team
+
+We learn during this hackaton ?
 
 Developers
 | [<img src="https://github.com/Steci.png?size=85" width=85><br><sub>Léa Guillemard</sub>](https://github.com/Steci) | [<img src="https://github.com/Doozers.png?size=85" width=85><br><sub>Ismaël Fall</sub>](https://github.com/Doozers) | [<img src="https://github.com/AmozPay.png?size=85" width=85><br><sub>Amoz Pay</sub>](https://github.com/AmozPay) | [<img src="https://github.com/ThisisYoYoDev.png?size=85" width=85><br><sub>Yoël Edery</sub>](https://github.com/ThisisYoYoDev) | [<img src="https://github.com/adrienfort.png?size=85" width=85><br><sub>Adrien Fort</sub>](https://github.com/adrienfort)
@@ -65,4 +69,4 @@ Organization
 
 > 🚀 Don't hesitate to follow us on our different networks, and put a star 🌟 on `PoC's` repositories
 
-> Made with :heart: by PoC
+> Made with ❤️ by PoC
