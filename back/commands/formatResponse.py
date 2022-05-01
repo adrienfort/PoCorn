@@ -5,14 +5,27 @@ from botClient import bot
 from botConfig import CHANNEL_ID, STARTON_API_KEY
 
 from logger.logger import logger
+import hashlib
 
+
+import json
+
+from datetime import datetime
 
 def parseData(data: dict):
     return "data"
 
 
+def writeData(jsonData: dict, time):
+    f = open(f"./save_notif/{time}.txt", "w")
+    f.write(json.dumps(jsonData))
+    f.close()
+
+
 async def sendMessage(data: dict):
     channel = bot.get_channel(int(CHANNEL_ID))
+    currentTime = hashlib.sha256(datetime.now().strftime('%D:%H:%M:%S').encode()).hexdigest()
+    writeData(data, currentTime)
     if len(data) > 4000:
         logger.panic(f"Message too long: {data}")
     json_data = {
@@ -29,5 +42,6 @@ async def sendMessage(data: dict):
     embedVar.add_field(name="Sender :blue_circle: :", value=f"{json_data['from']}", inline=False)
     embedVar.add_field(name="Receiver :red_circle: :", value=f"{json_data['to']}", inline=False)
     embedVar.add_field(name="Amount :money_with_wings: :", value=f"{json_data['value']}", inline=False)
+    embedVar.add_field(name=f"Get more infos here :", value=f"http://localhost:8080/infos/?file={currentTime}", inline=False)
 
     await channel.send(embed=embedVar)
