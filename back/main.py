@@ -14,7 +14,7 @@ app = FastAPI()
 from botClient import bot
 from botConfig import TOKEN
 
-from commands.formatResponse import sendMessage
+from commands.formatResponse import sendMessage, sendWelcomeMessage
 from watcher import router as watcherRouter
 from watcher import removeWatcher
 
@@ -43,6 +43,7 @@ async def startupDiscord():
     asyncio.create_task(bot.start(TOKEN))
     await asyncio.sleep(2)
     logger.info(f"Connected as {bot.user} !")
+    await sendWelcomeMessage()
 
 
 if __name__ == '__main__':
