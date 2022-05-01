@@ -31,7 +31,7 @@ Go to this [Website](https://cool-sherbet-c51568.netlify.app/) and generate the 
 
 - Aleph VM -
 
-- Starton Notify - To be notify about new information in the blockchain
+- Starton Notify - To be notified about new information in the blockchain
 
 ## Our Pocorn team :heart:
 
