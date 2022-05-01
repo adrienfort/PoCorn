@@ -1,0 +1,6 @@
+.env
+src
+device.key
+aleph_program.txt
+__pycache__
+.idea
