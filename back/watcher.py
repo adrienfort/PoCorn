@@ -62,14 +62,14 @@ async def get_handler():
 
 @router.get("/watcher/{id}")
 async def get_handler(id: str):
-    response = requests.request("GET", url, headers=headers)
+    response = requests.request("GET", url + f"/{id}", headers=headers)
     if response.status_code != 200:
         raise HTTPException(status_code = response.status_code, detail=response.json())
     return response.json()
 
 @router.delete("/watcher/{id}")
 async def delete_handler(id: str):
-    response = requests.request("DELETE", url + f"/{id}", headers=headers)
+    response = requests.request("DELETE", url + f"{id}", headers=headers)
     if response.status_code != 200:
         raise HTTPException(status_code = response.status_code, detail=response.json())
     del eventMapper[id]
