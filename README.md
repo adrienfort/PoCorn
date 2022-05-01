@@ -8,27 +8,29 @@ PoCorn offers you the possibility to notify the user by discord about an action 
 There is also a version for Berty, but it's still in progress.
 
 For this project, we use ReactJS for the Front using Chakra UI and for the Back a discord bot using PyBot and an API using fastAPI.
-The biggest technical challenge was to decentralized Aleph VM.
+The biggest technical challenge was to decentralized Aleph VM and link differents service in it.
 ## Installation
 
-[Explain how to install all of the project's dependencies]
+There is no installation this is in [production](http://51.68.94.127:3000)
+
 
 ### Quickstart
 
 You need to invite our discord bot to your server with this [link](https://discord.com/api/oauth2/authorize?client_id=969945066305122354&permissions=8&scope=bot). The configuration will be automatically done.
 ### Usage
 
-After invite the bot, go to this [Website](https://cool-sherbet-c51568.netlify.app/) and generate the configuration you want your bot.
+After invite the bot, go to this [Website](http://51.68.94.127:3000/) and generate the configuration you want your bot.
 
 ## Side-Quests
 
-- Aleph VM - We try to use it for run the application and discord bot on it but this is not working well, even Aleph Developper doesn't know why it don't work.
+- Aleph VM - We tried to use it for run the application and discord bot on it but this is not working well, even Aleph Developper doesn't know why it doesn't work.
 
 - Starton Notify - It's use to be notified the new information in the blockchain to our discord bot
 
 ## Our Pocorn team
 
-We learn during this hackaton how to use Starton API.
+During this hackaton we learn how to use Starton API.
+Also we learn more about channels bot and we plan for the future to implement this in others app like Berthy.
 
 Developers
 | [<img src="https://github.com/Steci.png?size=85" width=85><br><sub>Léa Guillemard</sub>](https://github.com/Steci) | [<img src="https://github.com/Doozers.png?size=85" width=85><br><sub>Ismaël Fall</sub>](https://github.com/Doozers) | [<img src="https://github.com/AmozPay.png?size=85" width=85><br><sub>Amoz Pay</sub>](https://github.com/AmozPay) | [<img src="https://github.com/ThisisYoYoDev.png?size=85" width=85><br><sub>Yoël Edery</sub>](https://github.com/ThisisYoYoDev) | [<img src="https://github.com/adrienfort.png?size=85" width=85><br><sub>Adrien Fort</sub>](https://github.com/adrienfort)
