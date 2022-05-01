@@ -36,7 +36,7 @@ async def handler(params: Watcher):
         raise HTTPException(status_code = response.status_code, detail=response.json())
     id = response.json()["id"]
     eventMapper[id] = params
-    return {"message": "OK"}
+    return {"id": id}
 
 @router.patch("/watcher/{id}")
 async def patch_handler(id: str, params: Watcher):
@@ -48,10 +48,11 @@ async def patch_handler(id: str, params: Watcher):
         "confirmationsBlocks": params.confirmationBlocks
     })
     response = requests.request("PATCH", url + f"/{id}", headers=headers, data=payload)
-    if response.status_code != 201:
+    if response.status_code != 200:
         raise HTTPException(status_code = response.status_code, detail=response.json())
+    print(params)
     eventMapper.update({id: params})
-    return {"message": "OK"}
+    return {"id": id}
 
 @router.get("/watcher/")
 async def get_handler():
