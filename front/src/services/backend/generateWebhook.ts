@@ -10,11 +10,11 @@ type GenerateWebhookBody = {
 
 export const generateWebhook = (data: GenerateWebhookBody) => {
 	console.log(data);
-	return backendApi.post<void>('/watcher', {
+	return backendApi.post<void>('/watcher/', {
 		address: data.walletAddress,
 		network: data.network,
-		type: data.activity,
-		confirmationsBlocks: data.nbBlocks,
+		watcherType: data.activity,
 		channelId: data.channelID,
+		confirmationsBlocks: data.nbBlocks,
 	});
 };

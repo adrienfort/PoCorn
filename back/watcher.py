@@ -2,6 +2,7 @@ from fastapi import APIRouter, HTTPException
 from botConfig import STARTON_API_KEY, HOST_ALEPH
 from customTypes import Watcher
 from mockDb import eventMapper
+from commands.formatResponse import sendWelcomeMessage
 import requests
 import json
 
@@ -46,9 +47,7 @@ async def handler(params: Watcher):
         raise HTTPException(status_code = response.status_code, detail=response.json())
     id = response.json()["id"]
     eventMapper[id] = params
-    CHANNEL_ID = params.channelId
-    if (CHANNEL_ID != params.channelId):
-        raise HTTPException(status_code = 400, detail="Channel id is not valid")
+    await sendWelcomeMessage(params.channelId)
     return {"id": id}
 
 @router.patch("/watcher/{id}")
@@ -58,6 +57,7 @@ async def patch_handler(id: str, params: Watcher):
         "network": params.network,
         "type": params.watcherType,
         "webhookUrl": HOST_ALEPH + "/webhook",
+        "channelId": params.channelId,
         "confirmationsBlocks": params.confirmationBlocks
     })
     response = requests.request("PATCH", url + f"/{id}", headers=headers, data=payload)

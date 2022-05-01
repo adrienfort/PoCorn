@@ -2,7 +2,7 @@ import discord
 
 from botClient import bot
 
-from botConfig import CHANNEL_ID, HOST_ALEPH
+from botConfig import HOST_ALEPH
 
 from logger.logger import logger
 import hashlib
@@ -41,16 +41,22 @@ dictCryptoToken = {
 }
 
 async def sendMessage(data: dict):
-    channel = bot.get_channel(int(CHANNEL_ID))
-    currentTime = hashlib.sha256(datetime.now().strftime('%D:%H:%M:%S').encode()).hexdigest()
-    writeData(data, currentTime)
     currCrypto = ""
+    channelID = ""
+    print(eventMapper)
     for val in eventMapper.values():
+        print("val", val)
         if val.address == data["data"]["transaction"]["from"] or val.address == data["data"]["transaction"]["to"]:
             currCrypto = dictCryptoToken.get(val.network)
+            channelID = val.channelId
             break
     if currCrypto is None:
         currCrypto = "?"
+    print("Channel", channelID)
+    print("Crypto", currCrypto)
+    channel = bot.get_channel(int(channelID))
+    currentTime = hashlib.sha256(datetime.now().strftime('%D:%H:%M:%S').encode()).hexdigest()
+    writeData(data, currentTime)
     json_data = {
         "type": data["event"],
         "hash": data["data"]["transaction"]["hash"],
@@ -70,7 +76,7 @@ async def sendMessage(data: dict):
     await channel.send(embed=embedVar)
 
 
-async def sendWelcomeMessage():
-    channel = bot.get_channel(int(CHANNEL_ID))
+async def sendWelcomeMessage(channelId: str):
+    channel = bot.get_channel(int(channelId))
     embedVar = discord.Embed(title="Welcome to the PoCorn Discord Bot :satellite:", description="**PoCorn is a blockchain monitoring bot :rocket:**\n\n**It is currently in beta phase :money_with_wings:**\n\n**Enjoy ! :satellite:**", color=discord.Color.red())
     await channel.send(embed=embedVar)

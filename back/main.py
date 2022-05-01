@@ -43,7 +43,6 @@ async def startupDiscord():
     asyncio.create_task(bot.start(TOKEN))
     await asyncio.sleep(2)
     logger.info(f"Connected as {bot.user} !")
-    await sendWelcomeMessage()
 
 
 if __name__ == '__main__':
