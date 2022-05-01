@@ -1,3 +1,7 @@
 discord
 colorama
 python-dotenv
+fastapi
+uvicorn
+pydantic
+asyncio
