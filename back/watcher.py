@@ -31,13 +31,14 @@ async def read_item(file: str):
     f = open(f"./save_notif/{file}.txt", "r")
     return {f.read()}
 
-@router.post("/watcher")
+@router.post("/watcher/")
 async def handler(params: Watcher):
     payload = json.dumps({
         "address": params.address,
         "network": params.network,
         "type": params.watcherType,
         "webhookUrl": HOST_ALEPH + "/webhook",
+        "channelId": params.channelId,
         "confirmationsBlocks": params.confirmationBlocks
     })
     response = requests.request("POST", url, headers=headers, data=payload)
@@ -45,6 +46,9 @@ async def handler(params: Watcher):
         raise HTTPException(status_code = response.status_code, detail=response.json())
     id = response.json()["id"]
     eventMapper[id] = params
+    CHANNEL_ID = params.channelId
+    if (CHANNEL_ID != params.channelId):
+        raise HTTPException(status_code = 400, detail="Channel id is not valid")
     return {"id": id}
 
 @router.patch("/watcher/{id}")
@@ -87,11 +91,3 @@ async def delete_handler(id: str):
 @router.get("/test")
 async def test():
     return eventMapper
-
-@router.patch("/channel-id")
-async def getChannelId(channelId: dict):
-    CHANNEL_ID = channelId["channelId"]
-    if (CHANNEL_ID != channelId["channelId"]):
-        raise HTTPException(status_code = 400, detail="Channel id is not valid")
-    print(CHANNEL_ID)
-    return {"message": "OK", "channelId": CHANNEL_ID}

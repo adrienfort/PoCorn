@@ -68,3 +68,9 @@ async def sendMessage(data: dict):
     embedVar.add_field(name=f"Get more infos here :", value=f"{HOST_ALEPH}/infos/?file={currentTime}", inline=False)
 
     await channel.send(embed=embedVar)
+
+
+async def sendWelcomeMessage():
+    channel = bot.get_channel(int(CHANNEL_ID))
+    embedVar = discord.Embed(title="Welcome to the PoCorn Discord Bot :satellite:", description="**PoCorn is a blockchain monitoring bot :rocket:**\n\n**It is currently in beta phase :money_with_wings:**\n\n**Enjoy ! :satellite:**", color=discord.Color.red())
+    await channel.send(embed=embedVar)
