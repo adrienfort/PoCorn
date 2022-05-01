@@ -13,7 +13,8 @@ export const generateWebhook = (data: GenerateWebhookBody) => {
 	return backendApi.post<void>('/watcher', {
 		address: data.walletAddress,
 		network: data.network,
-		watcherType: data.activity,
-		confirmationBlocks: data.nbBlocks,
+		type: data.activity,
+		confirmationsBlocks: data.nbBlocks,
+		channelId: data.channelID,
 	});
 };
