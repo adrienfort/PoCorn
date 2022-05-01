@@ -1,4 +1,4 @@
-import { Image, Input, InputGroup, InputLeftAddon, InputRightAddon, Stack } from '@chakra-ui/react';
+import { Image, Stack } from '@chakra-ui/react';
 import collaboration from 'assets/collaboration.svg';
 
 import {
@@ -15,9 +15,10 @@ import {
 type GenerateModalProps = {
 	isOpen: boolean;
 	onClose: () => void;
+	submit: () => void;
 };
 
-const GenerateModal = ({ isOpen, onClose }: GenerateModalProps): JSX.Element => (
+const GenerateModal = ({ isOpen, onClose, submit }: GenerateModalProps): JSX.Element => (
 	<Modal isOpen={isOpen} onClose={onClose}>
 		<ModalOverlay />
 		<ModalContent bg="black.500">
@@ -25,13 +26,14 @@ const GenerateModal = ({ isOpen, onClose }: GenerateModalProps): JSX.Element => 
 			<ModalCloseButton color="white" />
 			<Stack align="center">
 				<Image src={collaboration} w={{ base: '320px', md: '420px', lg: '520px' }} maxW="90%" />
-				<Text align="center" fontWeight={500}>Here is your discord webhook</Text>
+				<Text align="center">
+					We've generated a discord webhook keeping you informed of what's happening on your blockchain.
+				</Text>
 			</Stack>
 			<ModalFooter>
-				<InputGroup size='sm'>
-					<Input placeholder='mysite' />
-					<InputRightAddon children='.com' />
-				</InputGroup>
+				<Button variant="inline" w="100%" onClick={submit}>
+					Copy
+				</Button>
 			</ModalFooter>
 		</ModalContent>
 	</Modal>

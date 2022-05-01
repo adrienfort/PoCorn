@@ -3,19 +3,19 @@ import {
 	NumberIncrementStepper,
 	NumberInput,
 	NumberInputField,
-	NumberInputFieldProps,
+	NumberInputProps,
 	NumberInputStepper,
 } from '@chakra-ui/react';
 
 // Note : It would be better to create a variant
-const WhiteNumberInput = ({ ...rest }: NumberInputFieldProps): JSX.Element => (
-	<NumberInput step={1} min={1} defaultValue={1} w="100%">
+const WhiteNumberInput = ({ ...rest }: NumberInputProps): JSX.Element => (
+	<NumberInput {...rest}>
 		<NumberInputField
 			border="2px solid"
 			borderColor="black.300"
 			color="white"
+			w="100%"
 			_focus={{ outline: 'none', borderColor: 'white' }}
-			{...rest}
 		/>
 		<NumberInputStepper>
 			<NumberIncrementStepper color="white" />
