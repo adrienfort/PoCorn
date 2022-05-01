@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from botConfig import STARTON_API_KEY
+from botConfig import STARTON_API_KEY, HOST_ALEPH
 from customTypes import Watcher
 from mockDb import eventMapper
 import requests
@@ -8,14 +8,6 @@ import json
 router = APIRouter()
 
 url = "https://api.starton.io/v2/watcher"
-
-payload = json.dumps({
-  "address": "0x83dBe66D4Af30A16b738606e80E686235b683EF3",
-  "network": "polygon-mumbai",
-  "type": "ADDRESS_ACTIVITY",
-  "webhookUrl": "https://webhook.site/4a0971fb-fcdd-4a91-98b5-d08d4d1fb5c3",
-  "confirmationsBlocks": 1
-})
 
 headers = {
   'x-api-key': STARTON_API_KEY,
@@ -28,7 +20,7 @@ async def handler(params: Watcher):
         "address": params.address,
         "network": params.network,
         "type": params.watcherType,
-        "webhookUrl": "https://z5thl2lfiufig3gn72hkgpeypmqs2t7z7eukyhspml3ivi633aga.aleph.sh/webhook",
+        "webhookUrl": HOST_ALEPH + "/webhook",
         "confirmationsBlocks": params.confirmationBlocks
     })
     response = requests.request("POST", url, headers=headers, data=payload)
@@ -44,7 +36,7 @@ async def patch_handler(id: str, params: Watcher):
         "address": params.address,
         "network": params.network,
         "type": params.watcherType,
-        "webhookUrl": "https://z5thl2lfiufig3gn72hkgpeypmqs2t7z7eukyhspml3ivi633aga.aleph.sh/",
+        "webhookUrl": HOST_ALEPH + "/webhook",
         "confirmationsBlocks": params.confirmationBlocks
     })
     response = requests.request("PATCH", url + f"/{id}", headers=headers, data=payload)
@@ -78,3 +70,11 @@ async def delete_handler(id: str):
 @router.get("/test")
 async def test():
     return eventMapper
+
+@router.patch("/channel-id")
+async def getChannelId(channelId: dict):
+    CHANNEL_ID = channelId["channelId"]
+    if (CHANNEL_ID != channelId["channelId"]):
+        raise HTTPException(status_code = 400, detail="Channel id is not valid")
+    print(CHANNEL_ID)
+    return {"message": "OK", "channelId": CHANNEL_ID}

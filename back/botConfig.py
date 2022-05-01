@@ -40,3 +40,8 @@ STARTON_API_KEY: str = os.getenv("STARTON_API_KEY")
 
 if STARTON_API_KEY is None:
     exit_error("No API key provided")
+
+HOST_ALEPH: str = os.getenv("HOST_ALEPH")
+
+if HOST_ALEPH is None:
+    exit_error("No Host provided")
