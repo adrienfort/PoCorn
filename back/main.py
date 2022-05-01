@@ -35,12 +35,6 @@ async def webhooks(data: dict):
     return {"status": "ok"}
 
 
-@app.get("/infos/")
-async def read_item(file: str):
-    f = open(f"./save_notif/{file}.txt", "r")
-    return {f.read()}
-
-
 @app.on_event("startup")
 async def startupDiscord():
     logger.info("Removing old watcher")

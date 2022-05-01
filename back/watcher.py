@@ -26,6 +26,11 @@ def removeWatcher():
             raise HTTPException(status_code=500, detail="Error while deleting watcher")
     return True
 
+@router.get("/infos/")
+async def read_item(file: str):
+    f = open(f"./save_notif/{file}.txt", "r")
+    return {f.read()}
+
 @router.post("/watcher")
 async def handler(params: Watcher):
     payload = json.dumps({
