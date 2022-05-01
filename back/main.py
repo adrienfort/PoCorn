@@ -21,7 +21,6 @@ app.include_router(watcherRouter)
 
 @app.post("/webhook")
 async def webhooks(data: dict):
-    logger.info(data)
     await sendMessage(data)
     return {"status": "ok"}
 
