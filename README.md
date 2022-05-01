@@ -1,14 +1,19 @@
-# PoCorn
+## Problem
 
-[Project's description]
+[What problem is your project solving? How does it fit in the "Build a Decentralized Future" theme?]
 
-## How does it work?
+This project responds to the need to monitore your blockchain.
+Nowadays, getting feedback about a certain transaction outside your wallet application doesn't exit.
+## Solution
 
-[Explain how this project is working]
+[How did you solve that problem? What technologies did you use? What was the biggest technical challenge how do your solution solve it?]
 
-## Getting Started
+PoCorn offers you the possibility to notify the user by discord about an action on the blockchain.
+There is also a version for Berty, but this is still in progress.
 
-### Installation
+For this project, we use for the Front ReactJS using Chakra UI and for the Back a discord bot using PyBot.
+The biggest technical challenge was to decentralized Aleph VM.
+## Installation
 
 [Explain how to install all of the project's dependencies]
 
@@ -20,13 +25,15 @@
 
 [Explain how to use this project]
 
-## Get involved
+Go to this [Website](https://cool-sherbet-c51568.netlify.app/) and generate the configuration you want your bot or application.
 
-You're invited to join this project ! Check out the [contributing guide](./CONTRIBUTING.md).
+## Side-Quests
 
-If you're interested in how the project is organized at a higher level, please contact the current project manager.
+- Aleph VM - 
 
-## Our PoC team :heart:
+- Starton Notify - To be notify about new information in the blockchain
+
+## Our Pocorn team :heart:
 
 Developers
 | [<img src="https://github.com/Steci.png?size=85" width=85><br><sub>Léa Guillemard</sub>](https://github.com/Steci) | [<img src="https://github.com/Doozers.png?size=85" width=85><br><sub>Ismaël Fall</sub>](https://github.com/Doozers) | [<img src="https://github.com/AmozPay.png?size=85" width=85><br><sub>Amoz Pay</sub>](https://github.com/AmozPay) | [<img src="https://github.com/ThisisYoYoDev.png?size=85" width=85><br><sub>Yoël Edery</sub>](https://github.com/ThisisYoYoDev) | [<img src="https://github.com/adrienfort.png?size=85" width=85><br><sub>Adrien Fort</sub>](https://github.com/adrienfort)
@@ -56,6 +63,6 @@ Organization
     </a>
 </p>
 
-> :rocket: Don't hesitate to follow us on our different networks, and put a star 🌟 on `PoC's` repositories
+> 🚀 Don't hesitate to follow us on our different networks, and put a star 🌟 on `PoC's` repositories
 
 > Made with :heart: by PoC
