@@ -15,6 +15,7 @@ from botConfig import TOKEN
 
 from commands.formatResponse import sendMessage
 from watcher import router as watcherRouter
+from watcher import removeWatcher
 
 app.include_router(watcherRouter)
 
@@ -33,6 +34,9 @@ async def read_item(file: str):
 
 @app.on_event("startup")
 async def startupDiscord():
+    logger.info("Removing old watcher")
+    if not removeWatcher():
+        logger.info("Can't remove old watcher")
     asyncio.create_task(bot.start(TOKEN))
     await asyncio.sleep(2)
     logger.info(f"Connected as {bot.user} !")

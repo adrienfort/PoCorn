@@ -14,6 +14,18 @@ headers = {
   'Content-Type': 'application/json'
 }
 
+def removeWatcher():
+    response = requests.request("GET", url , headers=headers)
+    if response.status_code != 200:
+        raise HTTPException(status_code=500, detail="Error while getting watcher list")
+    watchers = response.json()
+    for req in watchers["items"]:
+        print(req["id"])
+        response = requests.request("DELETE" , url + "/" + str(req["id"]), headers=headers)
+        if response.status_code != 200:
+            raise HTTPException(status_code=500, detail="Error while deleting watcher")
+    return True
+
 @router.post("/watcher")
 async def handler(params: Watcher):
     payload = json.dumps({

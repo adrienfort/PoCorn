@@ -16,10 +16,6 @@ from mockDb import eventMapper
 from customTypes import Watcher
 
 
-def parseData(data: dict):
-    return "data"
-
-
 def writeData(jsonData: dict, time):
     if not os.path.exists("save_notif"):
         os.makedirs("save_notif")
