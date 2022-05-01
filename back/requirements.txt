@@ -5,3 +5,4 @@ fastapi
 uvicorn
 pydantic
 asyncio
+requests
