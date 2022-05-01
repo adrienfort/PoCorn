@@ -35,7 +35,7 @@ const HomePage = (): JSX.Element => (
 					w="520px"
 					maxW="90vw"
 				>
-					Setup your discord bot keeping you informed of what's happening on your blockchain
+					Setup a bot on the platform you want keeping you informed of what's happening on your wallet
 				</Text>
 			</VStack>
 			<VStack w={{ base: '90%', md: '496px' }}>

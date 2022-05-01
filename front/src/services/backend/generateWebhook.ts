@@ -1,20 +1,19 @@
-// import { backendApi } from '.';
+import { backendApi } from '.';
 
 type GenerateWebhookBody = {
 	walletAddress: string;
 	network: string;
 	activity: string;
 	nbBlocks: number;
+	channelID: string;
 };
-
-// type GenerateWebhookResponse = {
-// 	webhook: string;
-// };
-
-// export const generateWebhook = (data: GenerateWebhookBody) =>
-// 	backendApi.post<GenerateWebhookResponse>('/generate', data);
 
 export const generateWebhook = (data: GenerateWebhookBody) => {
 	console.log(data);
-	return { webhook: 'qsdfghjklmlkjhgfdsqsdfghjklmlkjhgfdsq' };
+	return backendApi.post<void>('/watcher', {
+		address: data.walletAddress,
+		network: data.network,
+		watcherType: data.activity,
+		confirmationBlocks: data.nbBlocks,
+	});
 };

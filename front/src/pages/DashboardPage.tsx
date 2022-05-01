@@ -24,36 +24,28 @@ const networks = [
 ];
 
 const activities = [
-	'ADDRESS_ACTIVITY',
-	'ADDRESS_RECEIVED_NATIVE_CURRENCY',
-	'ADDRESS_SENT_NATIVE_CURRENCY',
-	'EVENT_TRANSFER',
-	'EVENT_MINT',
-	'EVENT_APPROVAL',
-	'ERC721_EVENT_TRANSFER',
-	'ERC1155_EVENT_TRANSFER_SINGLE',
-	'ERC1155_EVENT_TRANSFER_BATCH',
+	{ key: 'New transaction', value: 'ADDRESS_ACTIVITY' },
+	{ key: 'Native token received', value: 'ADDRESS_RECEIVED_NATIVE_CURRENCY' },
+	{ key: 'Native token sent', value: 'ADDRESS_SENT_NATIVE_CURRENCY' },
+	{ key: 'ERC20 token transfered', value: 'EVENT_TRANSFER' },
+	{ key: 'ERC20 token minted', value: 'EVENT_MINT' },
+	{ key: 'Contract approved', value: 'EVENT_APPROVAL' },
+	{ key: 'NFT transfered on ERC721', value: 'ERC721_EVENT_TRANSFER' },
+	{ key: 'NFT transfered on ERC1155', value: 'ERC1155_EVENT_TRANSFER_SINGLE' },
+	{ key: 'NFT batch transfered on ERCC1155', value: 'ERC1155_EVENT_TRANSFER_BATCH' },
 ];
+
+const integrations = ['Discord'];
 
 const HomePage = (): JSX.Element => {
 	const [walletAddress, setWalletAddress] = useState('');
 	const [network, setNetwork] = useState(networks[0]);
-	const [activity, setActivity] = useState(activities[0]);
+	const [activity, setActivity] = useState(activities[0].value);
 	const [nbBlocks, setNbBlocks] = useState(1);
-	const [webhook, setWebhook] = useState('');
+	const [channelID, setChannelID] = useState('');
 
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const toast = useToast();
-
-	const copyWebhook = () => {
-		navigator.clipboard.writeText(webhook);
-		toast({
-			title: 'Copied !',
-			duration: 3000,
-			status: 'success',
-		});
-		onClose();
-	};
 
 	const generate = () => {
 		if (walletAddress === '') {
@@ -88,15 +80,38 @@ const HomePage = (): JSX.Element => {
 			});
 			return;
 		}
+		if (channelID === '') {
+			toast({
+				title: 'Invalid discord channel id',
+				duration: 5000,
+				status: 'error',
+			});
+			return;
+		}
 
-		onOpen();
-		const value = services.backend.generateWebhook({
-			walletAddress,
-			network,
-			activity,
-			nbBlocks,
-		});
-		setWebhook(value.webhook);
+		services.backend
+			.generateWebhook({
+				walletAddress,
+				network,
+				activity,
+				nbBlocks,
+				channelID,
+			})
+			.then(() => {
+				onOpen();
+				toast({
+					title: 'Bot successfully created',
+					duration: 5000,
+					status: 'success',
+				});
+			})
+			.catch(() => {
+				toast({
+					title: 'Bot creation failed',
+					duration: 5000,
+					status: 'error',
+				});
+			});
 	};
 
 	return (
@@ -109,8 +124,21 @@ const HomePage = (): JSX.Element => {
 				w="100%"
 				minH="100vh"
 				spacing={{ base: '32px', md: '48px', lg: '64px' }}
+				my="32px"
 			>
 				<VStack w={{ base: '90%', md: '496px' }} spacing="16px">
+					<VStack spacing="8px" w="100%" align="left">
+						<Text color="white" fontWeight="500">
+							Platform
+						</Text>
+						<WhiteSelect defaultValue={activities[0].value} onChange={(e) => setNetwork(e.target.value)}>
+							{integrations.map((element, index) => (
+								<option style={{ background: 'black' }} value={element} id={index.toString()}>
+									{element}
+								</option>
+							))}
+						</WhiteSelect>
+					</VStack>
 					<VStack spacing="8px" w="100%" align="left">
 						<Text color="white" fontWeight="500">
 							Your wallet address
@@ -119,9 +147,9 @@ const HomePage = (): JSX.Element => {
 					</VStack>
 					<VStack spacing="8px" w="100%" align="left">
 						<Text color="white" fontWeight="500">
-							Select the blockchain
+							Blockchain network
 						</Text>
-						<WhiteSelect defaultValue={activities[0]} onChange={(e) => setNetwork(e.target.value)}>
+						<WhiteSelect defaultValue={activities[0].value} onChange={(e) => setNetwork(e.target.value)}>
 							{networks.map((element, index) => (
 								<option style={{ background: 'black' }} value={element} id={index.toString()}>
 									{element}
@@ -131,19 +159,19 @@ const HomePage = (): JSX.Element => {
 					</VStack>
 					<VStack spacing="8px" w="100%" align="left">
 						<Text color="white" fontWeight="500">
-							Select the activity
+							Event type
 						</Text>
 						<WhiteSelect defaultValue={networks[0]} onChange={(e) => setActivity(e.target.value)}>
 							{activities.map((element, index) => (
-								<option style={{ background: 'black' }} value={element} id={index.toString()}>
-									{element}
+								<option style={{ background: 'black' }} value={element.value} id={index.toString()}>
+									{element.key}
 								</option>
 							))}
 						</WhiteSelect>
 					</VStack>
 					<VStack spacing="8px" w="100%" align="left">
 						<Text color="white" fontWeight="500">
-							Choose the number of blocks
+							Confirmation blocks
 						</Text>
 						<WhiteNumberInput
 							w="100%"
@@ -152,6 +180,12 @@ const HomePage = (): JSX.Element => {
 							defaultValue={1}
 							onChange={(_, valueNumber) => setNbBlocks(valueNumber)}
 						/>
+					</VStack>
+					<VStack spacing="8px" w="100%" align="left">
+						<Text color="white" fontWeight="500">
+							Discord channel ID
+						</Text>
+						<WhiteInput placeholder="Enter a discord channel ID" onChange={(e) => setChannelID(e.target.value)} />
 					</VStack>
 					<Link as={RouteLink} to="/dashboard" w="100%" mt="32px !important">
 						<Button variant="inline" w="100%" onClick={generate}>
@@ -162,7 +196,7 @@ const HomePage = (): JSX.Element => {
 				<Image src={bot} w={{ base: '320px', md: '420px', lg: '520px' }} maxW="90%" />
 			</Stack>
 
-			<GenerateModal isOpen={isOpen} onClose={onClose} submit={copyWebhook} />
+			<GenerateModal isOpen={isOpen} onClose={onClose} channelID={channelID} walletAddress={walletAddress} />
 		</>
 	);
 };
