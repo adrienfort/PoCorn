@@ -1,11 +1,7 @@
-from asyncio.log import logger
-from audioop import add
-from cmath import log
-from ctypes import addressof
-from http.client import NETWORK_AUTHENTICATION_REQUIRED, HTTPException
 from fastapi import APIRouter, HTTPException
 from botConfig import STARTON_API_KEY
-from pydantic import BaseModel
+from customTypes import Watcher
+from mockDb import eventMapper
 import requests
 import json
 
@@ -26,12 +22,6 @@ headers = {
   'Content-Type': 'application/json'
 }
 
-class Watcher(BaseModel):
-    address: str
-    network: str
-    watcherType: str
-    confirmationBlocks: str = 1
-
 @router.post("/watcher")
 async def handler(params: Watcher):
     payload = json.dumps({
@@ -44,6 +34,8 @@ async def handler(params: Watcher):
     response = requests.request("POST", url, headers=headers, data=payload)
     if response.status_code != 201:
         raise HTTPException(status_code = response.status_code, detail=response.json())
+    id = response.json()["id"]
+    eventMapper[id] = params
     return {"message": "OK"}
 
 @router.patch("/watcher/{id}")
@@ -58,10 +50,18 @@ async def patch_handler(id: str, params: Watcher):
     response = requests.request("PATCH", url + f"/{id}", headers=headers, data=payload)
     if response.status_code != 201:
         raise HTTPException(status_code = response.status_code, detail=response.json())
+    eventMapper.update({id: params})
     return {"message": "OK"}
 
 @router.get("/watcher/")
 async def get_handler():
+    response = requests.request("GET", url, headers=headers)
+    if response.status_code != 200:
+        raise HTTPException(status_code = response.status_code, detail=response.json())
+    return response.json()
+
+@router.get("/watcher/{id}")
+async def get_handler(id: str):
     response = requests.request("GET", url, headers=headers)
     if response.status_code != 200:
         raise HTTPException(status_code = response.status_code, detail=response.json())
@@ -72,4 +72,9 @@ async def delete_handler(id: str):
     response = requests.request("DELETE", url + f"/{id}", headers=headers)
     if response.status_code != 200:
         raise HTTPException(status_code = response.status_code, detail=response.json())
+    del eventMapper[id]
     return {"message": "OK"}
+
+@router.get("/test")
+async def test():
+    return eventMapper
