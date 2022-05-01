@@ -8,7 +8,7 @@ PoCorn offers you the possibility to notify the user by discord about an action 
 There is also a version for Berty, but it's still in progress.
 
 For this project, we use ReactJS for the Front using Chakra UI and for the Back a discord bot using PyBot and an API using fastAPI.
-The biggest technical challenge was to decentralized Aleph VM.
+The biggest technical challenge was to decentralized Aleph VM and link differents service in it.
 ## Installation
 
 [Explain how to install all of the project's dependencies]
@@ -22,7 +22,7 @@ After invite the bot, go to this [Website](https://cool-sherbet-c51568.netlify.a
 
 ## Side-Quests
 
-- Aleph VM - We try to use it for run the application and discord bot on it but this is not working well, even Aleph Developper doesn't know why it don't work.
+- Aleph VM - We tried to use it for run the application and discord bot on it but this is not working well, even Aleph Developper doesn't know why it doesn't work.
 
 - Starton Notify - It's use to be notified the new information in the blockchain to our discord bot
 
