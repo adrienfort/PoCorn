@@ -1,0 +1,1 @@
+docker run --rm -ti -v $(pwd)/device.key:/home/user/device.key:ro -v $(pwd)/src/:/home/user/src/:ro alephim/aleph-client:beta bash -c "aleph program ./src main:app"
