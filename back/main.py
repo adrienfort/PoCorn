@@ -7,6 +7,7 @@ load_dotenv()
 from logger.logger import logger
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
@@ -18,7 +19,15 @@ from watcher import router as watcherRouter
 from watcher import removeWatcher
 
 app.include_router(watcherRouter)
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins= [
+        "*"
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.post("/webhook")
 async def webhooks(data: dict):
